@@ -50,7 +50,7 @@
 #include <QTimer>
 
 Device::Device():
-    connected(false), controller(0), m_deviceScanState(false), randomAddress(false)
+    connected(false), controller(nullptr), m_deviceScanState(false), randomAddress(false)
 {
     //! [les-devicediscovery-1]
     discoveryAgent = new QBluetoothDeviceDiscoveryAgent();
@@ -162,7 +162,7 @@ void Device::scanServices(const QString &address)
     if (controller && m_previousAddress != currentDevice.getAddress()) {
         controller->disconnectFromDevice();
         delete controller;
-        controller = 0;
+        controller = nullptr;
     }
 
     //! [les-controller-1]
@@ -217,7 +217,7 @@ void Device::serviceScanDone()
 
 void Device::connectToService(const QString &uuid)
 {
-    QLowEnergyService *service = 0;
+    QLowEnergyService *service = nullptr;
     for (int i = 0; i < m_services.size(); i++) {
         ServiceInfo *serviceInfo = (ServiceInfo*)m_services.at(i);
         if (serviceInfo->getUuid() == uuid) {

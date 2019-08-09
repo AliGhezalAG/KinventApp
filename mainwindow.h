@@ -15,7 +15,14 @@ class MainWindow : public QMainWindow
 public:
     explicit MainWindow(QWidget *parent = nullptr);
     ~MainWindow();
-    void setDevice(Device *d);
+
+private slots:
+    void on_scanDevicesButton_clicked();
+    void on_connectDeviceButton_clicked();
+    void on_scanServicesButton_clicked();
+    void displayUpdate();
+    void updateDevicesBox();
+    QSequentialIterable getDevicesList();
 
 private:
     Ui::MainWindow *ui;
