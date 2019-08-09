@@ -50,7 +50,7 @@
 #include <QTimer>
 
 Device::Device():
-    connected(false), controller(nullptr), m_deviceScanState(false), randomAddress(false)
+    connected(false), controller(nullptr), m_deviceScanState(false), randomAddress(false), m_deviceScanFinished(false)
 {
     //! [les-devicediscovery-1]
     discoveryAgent = new QBluetoothDeviceDiscoveryAgent();
@@ -109,11 +109,13 @@ void Device::deviceScanFinished()
 {
     emit devicesUpdated();
     m_deviceScanState = false;
+    m_deviceScanFinished = true;
     emit stateChanged();
     if (devices.isEmpty())
         setUpdate("No Low Energy devices found...");
     else
         setUpdate("Done! Scan Again!");
+    emit scanFinished();
 }
 
 QVariant Device::getDevices()
@@ -341,6 +343,16 @@ void Device::deviceScanError(QBluetoothDeviceDiscoveryAgent::Error error)
 bool Device::state()
 {
     return m_deviceScanState;
+}
+
+bool Device::isScanFinished()
+{
+    return m_deviceScanFinished;
+}
+
+void Device::setScanFinished()
+{
+    m_deviceScanFinished = !m_deviceScanFinished;
 }
 
 bool Device::hasControllerError() const

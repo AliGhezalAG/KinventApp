@@ -22,7 +22,7 @@ private slots:
     void on_scanServicesButton_clicked();
     void displayUpdate();
     void updateDevicesBox();
-    QSequentialIterable getDevicesList();
+    QList<QVariant> getDevicesList();
 
 private:
     Ui::MainWindow *ui;

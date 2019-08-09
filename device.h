@@ -76,7 +76,8 @@ public:
     QString getUpdate();
     bool state();
     bool hasControllerError() const;
-
+    bool isScanFinished();
+    void setScanFinished();
     bool isRandomAddress() const;
     void setRandomAddress(bool newValue);
 
@@ -110,6 +111,7 @@ Q_SIGNALS:
     void updateChanged();
     void stateChanged();
     void disconnected();
+    void scanFinished();
     void randomAddressChanged();
 
 private:
@@ -124,6 +126,7 @@ private:
     bool connected;
     QLowEnergyController *controller;
     bool m_deviceScanState;
+    bool m_deviceScanFinished;
     bool randomAddress;
 };
 

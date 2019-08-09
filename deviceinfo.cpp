@@ -78,3 +78,7 @@ void DeviceInfo::setDevice(const QBluetoothDeviceInfo &dev)
     device = QBluetoothDeviceInfo(dev);
     Q_EMIT deviceChanged();
 }
+
+DeviceInfo::~DeviceInfo()
+{
+}

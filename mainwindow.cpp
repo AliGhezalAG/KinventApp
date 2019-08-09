@@ -16,13 +16,19 @@ MainWindow::MainWindow(QWidget *parent) :
 void MainWindow::on_scanDevicesButton_clicked()
 {
     deviceHandler->startDeviceDiscovery();
+    if(deviceHandler->isScanFinished()){
+        updateDevicesBox();
+        deviceHandler->setScanFinished();
+    }
 }
 
 void MainWindow::on_scanServicesButton_clicked()
 {
+    ui->infosTextEdit->setPlainText("Scanning services ...");
+
     QVariant selectedDevice = ui->devicesListBox->currentData();
-    QString selectedDeviceName = ui->devicesListBox->currentText();
-    //DeviceInfo *selectedDevice =
+    DeviceInfo *selectedDeviceInfo = selectedDevice.value<DeviceInfo*>();
+    deviceHandler->scanServices(selectedDeviceInfo->getAddress());
 }
 
 void MainWindow::on_connectDeviceButton_clicked()
@@ -33,30 +39,26 @@ void MainWindow::on_connectDeviceButton_clicked()
 void MainWindow::displayUpdate()
 {
     ui->infosTextEdit->setPlainText(deviceHandler->getUpdate());
-
-    if(!deviceHandler->state())
-        updateDevicesBox();
 }
 
 void MainWindow::updateDevicesBox()
 {
-    QSequentialIterable devicesList = getDevicesList();
+    QList<QVariant> devicesList = getDevicesList();
     for(int i=0; i < devicesList.size(); i++){
-        DeviceInfo selectedDeviceInfo = devicesList.at(i).value<DeviceInfo>();
-        ui->devicesListBox->addItem(selectedDeviceInfo.getName(), devicesList.at(i));
+        DeviceInfo *selectedDeviceInfo = devicesList.at(i).value<DeviceInfo*>();
+        ui->devicesListBox->addItem(selectedDeviceInfo->getName(), devicesList.at(i));
     }
-
-//    QList<DeviceInfo *> devicesList = getDevicesList();
-//    for(int i=0; i < devicesList.size(); i++){
-//        ui->devicesListBox->addItem(devicesList.at(i)->getName(), devicesList.at(i));
-//    }
-
 }
 
-QSequentialIterable MainWindow::getDevicesList()
+QList<QVariant> MainWindow::getDevicesList()
 {
     QVariant variant = deviceHandler->getDevices();
-    return variant.value<QSequentialIterable>();
+    QSequentialIterable iterable = variant.value<QSequentialIterable>();
+    QList<QVariant> devicesList = {};
+    for (const QVariant &v : iterable) {
+        devicesList.append(v);
+    }
+    return devicesList;
 }
 
 MainWindow::~MainWindow()
