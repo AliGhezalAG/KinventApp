@@ -215,6 +215,7 @@ void Device::serviceScanDone()
     // force UI in case we didn't find anything
     if (m_services.isEmpty())
         emit servicesUpdated();
+    emit servicesScanFinished();
 }
 
 void Device::connectToService(const QString &uuid)

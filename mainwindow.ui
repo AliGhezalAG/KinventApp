@@ -6,7 +6,7 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>400</width>
+    <width>1095</width>
     <height>300</height>
    </rect>
   </property>
@@ -19,7 +19,7 @@
      <rect>
       <x>20</x>
       <y>20</y>
-      <width>89</width>
+      <width>201</width>
       <height>25</height>
      </rect>
     </property>
@@ -32,7 +32,7 @@
      <rect>
       <x>20</x>
       <y>60</y>
-      <width>86</width>
+      <width>201</width>
       <height>25</height>
      </rect>
     </property>
@@ -41,8 +41,8 @@
     <property name="geometry">
      <rect>
       <x>20</x>
-      <y>140</y>
-      <width>89</width>
+      <y>180</y>
+      <width>201</width>
       <height>25</height>
      </rect>
     </property>
@@ -53,10 +53,10 @@
    <widget class="QTextEdit" name="infosTextEdit">
     <property name="geometry">
      <rect>
-      <x>140</x>
+      <x>240</x>
       <y>20</y>
-      <width>231</width>
-      <height>221</height>
+      <width>831</width>
+      <height>181</height>
      </rect>
     </property>
    </widget>
@@ -65,12 +65,22 @@
      <rect>
       <x>20</x>
       <y>100</y>
-      <width>89</width>
+      <width>201</width>
       <height>25</height>
      </rect>
     </property>
     <property name="text">
      <string>Scan services</string>
+    </property>
+   </widget>
+   <widget class="QComboBox" name="servicesBox">
+    <property name="geometry">
+     <rect>
+      <x>20</x>
+      <y>140</y>
+      <width>201</width>
+      <height>25</height>
+     </rect>
     </property>
    </widget>
   </widget>
@@ -79,7 +89,7 @@
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>400</width>
+     <width>1095</width>
      <height>22</height>
     </rect>
    </property>

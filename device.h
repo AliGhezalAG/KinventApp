@@ -112,6 +112,7 @@ Q_SIGNALS:
     void stateChanged();
     void disconnected();
     void scanFinished();
+    void servicesScanFinished();
     void randomAddressChanged();
 
 private:

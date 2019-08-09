@@ -23,10 +23,15 @@ private slots:
     void displayUpdate();
     void updateDevicesBox();
     QList<QVariant> getDevicesList();
+    void updateServicesBox();
+    QList<QVariant> getServicesList();
+    QList<QVariant> getCharacteristicsList();
+    void displayCharacteristicsList();
 
 private:
     Ui::MainWindow *ui;
     Device *deviceHandler;
+    CharacteristicInfo *notificationCharacteristic;
 };
 
 #endif // MAINWINDOW_H
